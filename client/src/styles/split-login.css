@@ -1,0 +1,1008 @@
+/* ==========================================================================
+   Vault-X Split-Screen Luxury Login Styles
+   Left Panel: Dark Futuristic Cryptographic Visual Experience (55%)
+   Right Panel: Light Premium Luxury Sign-In Form (45%)
+   ========================================================================== */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Left Panel Dark Cyber Palette */
+  --cyber-bg: #07090e;
+  --cyber-bg-alt: #0d121f;
+  --cyber-card-bg: rgba(13, 18, 30, 0.85);
+  --cyber-cyan: #00f2fe;
+  --cyber-cyan-glow: rgba(0, 242, 254, 0.25);
+  --cyber-ice: #38bdf8;
+  --cyber-violet: #8b5cf6;
+  --cyber-violet-dark: #6d28d9;
+  --cyber-text-main: #f8fafc;
+  --cyber-text-muted: #94a3b8;
+  --cyber-border: rgba(255, 255, 255, 0.08);
+
+  /* Right Panel Light Luxury Palette */
+  --light-bg: #f8fafc;
+  --light-surface: #ffffff;
+  --light-text-title: #0f172a;
+  --light-text-body: #334155;
+  --light-text-muted: #64748b;
+  --light-border: #e2e8f0;
+  --light-border-focus: #6366f1;
+  --light-accent-violet: #4f46e5;
+  --light-accent-cyan: #0891b2;
+}
+
+/* Split-Screen Main Wrapper */
+.split-viewport-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--cyber-bg);
+  font-family: var(--font-sans);
+}
+
+/* ==========================================================================
+   1. LEFT PANEL: Cinematic Animated Encryption Experience (55%)
+   ========================================================================== */
+
+.cinematic-panel {
+  flex: 0 0 55%;
+  width: 55%;
+  height: 100vh;
+  position: relative;
+  background-color: var(--cyber-bg);
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 3rem;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Ambient Radial Glows */
+.cinematic-ambient-glow-1 {
+  position: absolute;
+  top: -80px;
+  left: 20%;
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.18) 0%, rgba(124, 58, 237, 0.12) 45%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cinematic-ambient-glow-2 {
+  position: absolute;
+  bottom: -60px;
+  right: 10%;
+  width: 450px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.18) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Left Panel Top Header */
+.cinematic-brand-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brand-emblem-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(124, 58, 237, 0.25));
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  box-shadow: 0 0 16px var(--cyber-cyan-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.85rem;
+}
+
+.brand-text-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  background: linear-gradient(120deg, #ffffff 40%, var(--cyber-cyan) 85%, var(--cyber-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tagline {
+  font-size: 0.68rem;
+  color: var(--cyber-text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.brand-protocol-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(13, 18, 30, 0.85);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyber-cyan);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.1);
+}
+
+.protocol-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--cyber-cyan);
+  box-shadow: 0 0 6px var(--cyber-cyan);
+  animation: pulse-dot 1.8s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   Center Stage: Holographic Chamber & Central Floating File Card
+   ========================================================================== */
+
+.encryption-stage-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+  min-height: 440px;
+}
+
+/* Concentric Holographic Rings */
+.holo-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid rgba(0, 242, 254, 0.08);
+}
+
+.outer-ring {
+  width: 440px;
+  height: 440px;
+  border: 1px dashed rgba(0, 242, 254, 0.12);
+  animation: spin-clockwise 45s linear infinite;
+  transition: all 0.5s ease;
+}
+
+.outer-ring.secured {
+  border-color: rgba(0, 242, 254, 0.35);
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.15);
+}
+
+.middle-ring {
+  width: 360px;
+  height: 360px;
+  border: 1px solid rgba(139, 92, 246, 0.12);
+  animation: spin-counter 30s linear infinite;
+}
+
+.middle-ring.active {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.15);
+}
+
+.inner-ring {
+  width: 280px;
+  height: 280px;
+  border: 1px dotted rgba(255, 255, 255, 0.08);
+}
+
+/* Floating File Card */
+.floating-file-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: var(--cyber-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 242, 254, 0.1);
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.floating-file-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 242, 254, 0.3);
+}
+
+.floating-file-card.stage-2 {
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 242, 254, 0.2);
+}
+
+.floating-file-card.stage-3,
+.floating-file-card.stage-4 {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 28px rgba(139, 92, 246, 0.25);
+}
+
+/* Laser Scanning Beam */
+.laser-scanning-beam {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 5%, var(--cyber-cyan) 50%, transparent 95%);
+  box-shadow: 0 0 16px 4px var(--cyber-cyan);
+  animation: scan-vertical 2.4s ease-in-out infinite alternate;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.laser-glow {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(0, 242, 254, 0.15), transparent);
+}
+
+/* Vault Secured Stamp Overlay */
+.vault-secure-stamp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(7, 10, 18, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  z-index: 25;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.92);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vault-secure-stamp.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.stamp-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(0, 242, 254, 0.1);
+  border: 2px solid var(--cyber-cyan);
+  box-shadow: 0 0 24px var(--cyber-cyan-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: stamp-pop 0.5s ease-out;
+}
+
+.stamp-text {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cyber-cyan);
+  text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+}
+
+/* File Card Header & Meta */
+.file-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--cyber-border);
+}
+
+.file-type-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--cyber-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.file-meta {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
+
+.file-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cyber-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono);
+}
+
+.file-format-tag {
+  font-size: 0.68rem;
+  color: var(--cyber-text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.file-status-indicator {
+  flex-shrink: 0;
+}
+
+.status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.status-pill.stage-1 {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--cyber-ice);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.status-pill.stage-2 {
+  background: rgba(0, 242, 254, 0.15);
+  color: var(--cyber-cyan);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  animation: pulse-dot 1.2s infinite;
+}
+
+.status-pill.stage-3,
+.status-pill.stage-4 {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--cyber-violet);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+/* File Card Body & Cipher Matrix */
+.file-card-body {
+  padding: 1rem 0;
+}
+
+.cipher-matrix-box {
+  background: rgba(6, 9, 15, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.plain-row {
+  color: var(--cyber-text-muted);
+}
+
+.ciphertext-stream {
+  animation: fade-in 0.3s ease;
+}
+
+.cipher-row {
+  color: var(--cyber-cyan);
+  text-shadow: 0 0 6px rgba(0, 242, 254, 0.25);
+}
+
+/* Progress Track */
+.encryption-progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+}
+
+.progress-stage-title {
+  color: var(--cyber-text-muted);
+}
+
+.progress-value {
+  color: var(--cyber-cyan);
+  font-weight: 700;
+}
+
+.progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-violet));
+  border-radius: 9999px;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 10px var(--cyber-cyan-glow);
+}
+
+/* Card Telemetry Footer */
+.file-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--cyber-border);
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.telemetry-label {
+  font-size: 0.62rem;
+  color: var(--cyber-text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+.telemetry-val {
+  font-size: 0.75rem;
+  color: var(--cyber-text-main);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.telemetry-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--cyber-border);
+}
+
+/* Floating Fragment Particles */
+.floating-fragments-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fragment-particle {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(0, 242, 254, 0.45);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: rgba(13, 18, 30, 0.5);
+}
+
+.fragment-particle.p1 {
+  top: 15%;
+  left: 12%;
+  animation: float-slow 7s ease-in-out infinite alternate;
+}
+
+.fragment-particle.p2 {
+  top: 25%;
+  right: 15%;
+  animation: float-slow 6s ease-in-out infinite 1s alternate;
+}
+
+.fragment-particle.p3 {
+  bottom: 22%;
+  left: 14%;
+  animation: float-slow 8s ease-in-out infinite 0.5s alternate;
+}
+
+.fragment-particle.p4 {
+  bottom: 18%;
+  right: 12%;
+  animation: float-slow 7.5s ease-in-out infinite 1.5s alternate;
+}
+
+.fragment-particle.p5 {
+  top: 6%;
+  right: 25%;
+  animation: float-slow 9s ease-in-out infinite 2s alternate;
+}
+
+/* Left Panel Footer Notice */
+.cinematic-footer-notice {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--cyber-text-muted);
+  line-height: 1.45;
+  background: rgba(13, 18, 30, 0.6);
+  border: 1px solid var(--cyber-border);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+}
+
+.notice-lock-icon {
+  font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   2. RIGHT PANEL: Light Luxury Sign-In Form (45%)
+   ========================================================================== */
+
+.signin-panel {
+  flex: 0 0 45%;
+  width: 45%;
+  height: 100vh;
+  background-color: var(--light-bg);
+  background-image: 
+    radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(8, 145, 178, 0.04) 0%, transparent 40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+}
+
+.signin-panel-content {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header & Text */
+.signin-header {
+  margin-bottom: 2rem;
+}
+
+.signin-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--light-text-title);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.signin-subtitle {
+  font-size: 0.92rem;
+  color: var(--light-text-muted);
+  line-height: 1.55;
+}
+
+/* Alert Notification Banners */
+.form-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin-bottom: 1.5rem;
+  animation: slide-in 0.25s ease-out;
+}
+
+.alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.alert-notice {
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #3730a3;
+}
+
+.alert-svg-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Form Styles */
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  width: 100%;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--light-text-body);
+  letter-spacing: 0.01em;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.text-input {
+  width: 100%;
+  background: var(--light-surface);
+  border: 1.5px solid var(--light-border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--light-text-title);
+  transition: all 0.2s ease;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.text-input::placeholder {
+  color: #94a3b8;
+}
+
+.text-input:focus {
+  border-color: var(--light-border-focus);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+.text-input.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+/* Password Toggle Button */
+.toggle-visibility-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--light-text-muted);
+  cursor: pointer;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+
+.toggle-visibility-btn:hover {
+  color: var(--light-text-title);
+}
+
+.toggle-visibility-btn:focus-visible {
+  outline: 2px solid var(--light-border-focus);
+  outline-offset: 2px;
+}
+
+/* Remember Me Checkbox */
+.form-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -0.25rem;
+}
+
+.checkbox-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input-element {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--light-surface);
+  border: 1.5px solid #cbd5e1;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox-input-element:checked {
+  background: var(--light-accent-violet);
+  border-color: var(--light-accent-violet);
+}
+
+.checkbox-input-element:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-input-element:focus-visible {
+  outline: 2px solid var(--light-border-focus);
+  outline-offset: 2px;
+}
+
+.checkbox-label-text {
+  font-size: 0.86rem;
+  color: var(--light-text-body);
+}
+
+/* Primary Sign In Button */
+.btn-primary-signin {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #312e81 100%);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary-signin:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.35);
+  background: linear-gradient(135deg, #020617 0%, #1e1b4b 50%, #4338ca 100%);
+}
+
+.btn-primary-signin:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary-signin:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner State */
+.btn-loading-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+/* Subtle Zero-Knowledge Footer */
+.signin-footer-security {
+  margin-top: 2.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--light-text-muted);
+  line-height: 1.45;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--light-border);
+}
+
+
+/* ==========================================================================
+   Keyframe Animations
+   ========================================================================== */
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes spin-clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-counter {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes scan-vertical {
+  0% { top: 0%; opacity: 0.2; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 96%; opacity: 0.2; }
+}
+
+@keyframes stamp-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-12px); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  .cinematic-panel {
+    flex: 0 0 50%;
+    width: 50%;
+    padding: 2rem;
+  }
+  .signin-panel {
+    flex: 0 0 50%;
+    width: 50%;
+    padding: 2.5rem 2rem;
+  }
+  .holo-ring.outer-ring {
+    width: 360px;
+    height: 360px;
+  }
+  .holo-ring.middle-ring {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Mobile & Small Screens (< 768px) */
+@media (max-width: 768px) {
+  .split-viewport-wrapper {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .cinematic-panel {
+    flex: none;
+    width: 100%;
+    height: auto;
+    min-height: 340px;
+    padding: 1.5rem 1.25rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .encryption-stage-container {
+    min-height: 240px;
+    margin: 1.5rem 0;
+  }
+
+  .holo-ring.outer-ring {
+    width: 280px;
+    height: 280px;
+  }
+
+  .holo-ring.middle-ring {
+    width: 220px;
+    height: 220px;
+  }
+
+  .floating-file-card {
+    max-width: 320px;
+    padding: 1.15rem;
+  }
+
+  .floating-fragments-container {
+    display: none;
+  }
+
+  .signin-panel {
+    flex: none;
+    width: 100%;
+    height: auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .signin-title {
+    font-size: 1.65rem;
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .holo-ring,
+  .laser-scanning-beam,
+  .fragment-particle,
+  .protocol-pulse-dot {
+    animation: none !important;
+  }
+}

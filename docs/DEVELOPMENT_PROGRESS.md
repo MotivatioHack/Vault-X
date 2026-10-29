@@ -170,6 +170,11 @@ The following items were strictly excluded from Brick 1 and will be introduced i
   - Styled with clean wrapping for all viewport widths, ensuring it never displays as an error.
   - Refined footer description to reflect intended client-side zero-knowledge architecture.
 
+- **Autofill & Pre-population Fix**:
+  - Confirmed `email` and `password` React states strictly initialize to empty strings (`''`).
+  - Audited codebase: 0 occurrences of hardcoded credentials, 0 `defaultValue` props, 0 unintended autofill logic.
+  - Added `autoComplete="off"` to the parent `<form>` to prevent browsers from automatically dumping previously saved domain credentials on initial page load, while preserving `autoComplete="email"` and `autoComplete="current-password"` on the inputs for password-manager access upon user focus.
+
 ---
 
 ### 12. Exact Next Step

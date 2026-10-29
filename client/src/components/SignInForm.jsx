@@ -94,7 +94,7 @@ export default function SignInForm() {
       )}
 
       {/* The Sign-In Form */}
-      <form className="signin-form" onSubmit={handleFormSubmit} noValidate>
+      <form className="signin-form" onSubmit={handleFormSubmit} noValidate autoComplete="off">
         {/* Email Input Field */}
         <div className="form-field-group">
           <label htmlFor="user-email" className="field-label">

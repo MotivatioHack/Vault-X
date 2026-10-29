@@ -152,7 +152,27 @@ The following items were strictly excluded from Brick 1 and will be introduced i
 
 ---
 
-### 11. Exact Next Step
+### 11. UI Refinement Brick: Cinematic Animation + Login Polish
+- **Refinement 1 (Cinematic Animation Sequence)**:
+  - Upgraded left panel to a coordinated 5-stage looping visual sequence:
+    - **Stage A (File detected)**: Smooth entrance animation of `confidential_document.pdf` with floating ambient particles.
+    - **Stage B (Encryption processing)**: Cyan/violet scanning laser beam sweeps the document while progress bar fills 0% to 100% and displays status `Encrypting file...`.
+    - **Stage C (File transformation)**: Elegant light pulse (`transform-pulse`) while document morphs into `confidential_document.enc` with authenticated ciphertext hex streams.
+    - **Stage D (Vault secured)**: Illuminated shield/lock emblem displaying `Encrypted` and `Vault secured` with restrained cyan/violet glow.
+    - **Stage E (Smooth looping)**: Brief pause and seamless cross-fade repeating indefinitely.
+  - Prominently labeled with explicit accuracy disclosure: `Illustrative encryption simulation`.
+- **Refinement 2 (Empty Credential States)**:
+  - Completely cleared prefilled email and password state; both strictly start empty.
+  - Updated placeholders to `you@example.com` and `Enter your master password`.
+- **Refinement 3 (Professional Pending Authentication Notice)**:
+  - Formulated concise, professional pending status in a light violet information panel:
+    `Authentication service pending. Database credential verification will be enabled in a later development stage.`
+  - Styled with clean wrapping for all viewport widths, ensuring it never displays as an error.
+  - Refined footer description to reflect intended client-side zero-knowledge architecture.
+
+---
+
+### 12. Exact Next Step
 - **Brick 2: Database Connection & User Authentication Model**
   - Integrate MongoDB Atlas with Mongoose.
   - Implement User schema with cryptographic salt and password hash fields.

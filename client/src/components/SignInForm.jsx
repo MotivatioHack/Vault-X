@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 
 export default function SignInForm() {
+  // Refinement 2: Email and password start strictly empty with zero prefilled credentials
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [statusNotice, setStatusNotice] = useState('');
+
+  // Refinement 3: Professional, concise pending notice visible on the page
+  const [statusNotice, setStatusNotice] = useState(
+    'Authentication service pending. Database credential verification will be enabled in a later development stage.'
+  );
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -16,7 +21,6 @@ export default function SignInForm() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setErrorMessage('');
-    setStatusNotice('');
 
     const trimmedEmail = email.trim();
 
@@ -44,16 +48,16 @@ export default function SignInForm() {
       return;
     }
 
-    // 4. Submission & Loading State
+    // 4. Form Submission Loading State
     setIsLoading(true);
 
-    // Isolate future authentication integration; show pending service status
     setTimeout(() => {
       setIsLoading(false);
+      // Ensure the notice remains the professional pending wording
       setStatusNotice(
-        'Authentication service pending Brick 2 integration. Master password validated locally; database credential verification is not yet enabled.'
+        'Authentication service pending. Database credential verification will be enabled in a later development stage.'
       );
-    }, 750);
+    }, 700);
   };
 
   return (
@@ -61,11 +65,11 @@ export default function SignInForm() {
       <div className="signin-header">
         <h2 className="signin-title">Sign In to Vault-X</h2>
         <p className="signin-subtitle">
-          Enter your credentials to unlock and decrypt your secure cloud vault.
+          Enter your credentials to access your encrypted cloud vault.
         </p>
       </div>
 
-      {/* Validation Error Banner */}
+      {/* Dedicated Validation Error Area */}
       {errorMessage && (
         <div className="form-alert alert-error" role="alert" aria-live="assertive">
           <svg className="alert-svg-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -77,11 +81,11 @@ export default function SignInForm() {
         </div>
       )}
 
-      {/* Status Notice Banner */}
+      {/* Refinement 3: Light Violet Information Panel for Pending Authentication */}
       {statusNotice && (
         <div className="form-alert alert-notice" role="status" aria-live="polite">
           <svg className="alert-svg-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4f46e5" strokeWidth="2" />
+            <circle cx="12" cy="12" r="10" stroke="#4f46e5" strokeWidth="2" />
             <path d="M12 16V12" stroke="#4f46e5" strokeWidth="2" strokeLinecap="round" />
             <circle cx="12" cy="8" r="1" fill="#4f46e5" />
           </svg>
@@ -107,7 +111,7 @@ export default function SignInForm() {
                 setEmail(e.target.value);
                 if (errorMessage) setErrorMessage('');
               }}
-              placeholder="name@organization.com"
+              placeholder="you@example.com"
               className={`text-input ${errorMessage && !email.trim() ? 'input-error' : ''}`}
               disabled={isLoading}
             />
@@ -130,7 +134,7 @@ export default function SignInForm() {
                 setPassword(e.target.value);
                 if (errorMessage) setErrorMessage('');
               }}
-              placeholder="••••••••••••"
+              placeholder="Enter your master password"
               className={`text-input ${errorMessage && !password ? 'input-error' : ''}`}
               disabled={isLoading}
             />
@@ -141,13 +145,13 @@ export default function SignInForm() {
               aria-label={showPassword ? 'Hide master password' : 'Show master password'}
             >
               {showPassword ? (
-                /* Eye Off SVG */
+                /* Eye Off Icon */
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
               ) : (
-                /* Eye Open SVG */
+                /* Eye Open Icon */
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
@@ -182,7 +186,7 @@ export default function SignInForm() {
           {isLoading ? (
             <span className="btn-loading-state">
               <span className="btn-spinner" aria-hidden="true" />
-              <span>Authenticating Vault...</span>
+              <span>Authenticating...</span>
             </span>
           ) : (
             <span>Sign In</span>
@@ -190,14 +194,14 @@ export default function SignInForm() {
         </button>
       </form>
 
-      {/* Subtle Zero-Knowledge Footer */}
+      {/* Descriptive Footer (Intended Design rather than unverified security claims) */}
       <div className="signin-footer-security">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
           <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
         <span>
-          Protected by client-side zero-knowledge encryption. Keys are never transmitted in plaintext.
+          Designed with client-side zero-knowledge architecture. Master passwords and cryptographic keys are engineered to remain isolated on your device.
         </span>
       </div>
     </div>

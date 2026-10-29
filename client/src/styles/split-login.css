@@ -192,9 +192,10 @@
   transition: all 0.5s ease;
 }
 
-.outer-ring.secured {
-  border-color: rgba(0, 242, 254, 0.35);
-  box-shadow: 0 0 35px rgba(0, 242, 254, 0.15);
+.outer-ring.secured,
+.outer-ring.secured-pulse {
+  border-color: rgba(0, 242, 254, 0.45);
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.2), inset 0 0 20px rgba(124, 58, 237, 0.15);
 }
 
 .middle-ring {
@@ -204,9 +205,10 @@
   animation: spin-counter 30s linear infinite;
 }
 
-.middle-ring.active {
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 0 25px rgba(139, 92, 246, 0.15);
+.middle-ring.active,
+.middle-ring.processing-active {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.2);
 }
 
 .inner-ring {
@@ -239,15 +241,31 @@
   border-color: rgba(0, 242, 254, 0.3);
 }
 
-.floating-file-card.stage-2 {
-  border-color: rgba(0, 242, 254, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 242, 254, 0.2);
+/* Coordinated Stages Styling */
+.floating-file-card.stage-a {
+  animation: entrance-fade-up 0.8s ease-out;
+  border-color: rgba(0, 242, 254, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 242, 254, 0.1);
 }
 
-.floating-file-card.stage-3,
-.floating-file-card.stage-4 {
-  border-color: rgba(139, 92, 246, 0.4);
+.floating-file-card.stage-b {
+  border-color: rgba(0, 242, 254, 0.45);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 242, 254, 0.22);
+}
+
+.floating-file-card.stage-c {
+  border-color: rgba(139, 92, 246, 0.45);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 28px rgba(139, 92, 246, 0.25);
+}
+
+.floating-file-card.transforming-pulse {
+  animation: transform-pulse 1.2s ease-out;
+}
+
+.floating-file-card.stage-d,
+.floating-file-card.stage-e {
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 32px rgba(0, 242, 254, 0.25);
 }
 
 /* Laser Scanning Beam */
@@ -256,9 +274,9 @@
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, transparent 5%, var(--cyber-cyan) 50%, transparent 95%);
-  box-shadow: 0 0 16px 4px var(--cyber-cyan);
-  animation: scan-vertical 2.4s ease-in-out infinite alternate;
+  background: linear-gradient(90deg, transparent 5%, var(--cyber-cyan) 35%, var(--cyber-violet) 65%, transparent 95%);
+  box-shadow: 0 0 16px 4px rgba(0, 242, 254, 0.6), 0 0 8px 2px rgba(139, 92, 246, 0.4);
+  animation: scan-vertical 2.2s ease-in-out infinite alternate;
   z-index: 20;
   pointer-events: none;
 }
@@ -269,7 +287,7 @@
   left: 0;
   width: 100%;
   height: 40px;
-  background: linear-gradient(to bottom, rgba(0, 242, 254, 0.15), transparent);
+  background: linear-gradient(to bottom, rgba(0, 242, 254, 0.15), rgba(139, 92, 246, 0.08), transparent);
 }
 
 /* Vault Secured Stamp Overlay */
@@ -312,13 +330,29 @@
   animation: stamp-pop 0.5s ease-out;
 }
 
-.stamp-text {
+.stamp-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stamp-main-text {
   font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--cyber-cyan);
   text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+}
+
+.stamp-sub-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyber-violet);
 }
 
 /* File Card Header & Meta */
@@ -340,6 +374,18 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.file-type-icon.icon-encrypted {
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.25);
+}
+
+.file-type-icon.icon-plaintext {
+  border-color: rgba(0, 242, 254, 0.3);
+  background: rgba(0, 242, 254, 0.06);
 }
 
 .file-meta {
@@ -357,6 +403,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: var(--font-mono);
+  transition: color 0.3s ease;
 }
 
 .file-format-tag {
@@ -380,24 +427,30 @@
   border-radius: 4px;
 }
 
-.status-pill.stage-1 {
+.status-pill.pill-a {
   background: rgba(56, 189, 248, 0.1);
   color: var(--cyber-ice);
   border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
-.status-pill.stage-2 {
+.status-pill.pill-b {
   background: rgba(0, 242, 254, 0.15);
   color: var(--cyber-cyan);
   border: 1px solid rgba(0, 242, 254, 0.4);
   animation: pulse-dot 1.2s infinite;
 }
 
-.status-pill.stage-3,
-.status-pill.stage-4 {
+.status-pill.pill-c {
   background: rgba(139, 92, 246, 0.15);
   color: var(--cyber-violet);
   border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+.status-pill.pill-d,
+.status-pill.pill-e {
+  background: rgba(0, 242, 254, 0.15);
+  color: var(--cyber-cyan);
+  border: 1px solid rgba(0, 242, 254, 0.4);
 }
 
 /* File Card Body & Cipher Matrix */
@@ -856,6 +909,29 @@
 /* ==========================================================================
    Keyframe Animations
    ========================================================================== */
+
+@keyframes entrance-fade-up {
+  from {
+    opacity: 0.3;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes transform-pulse {
+  0% {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 242, 254, 0.3);
+  }
+  50% {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 45px rgba(139, 92, 246, 0.6), 0 0 25px rgba(0, 242, 254, 0.5);
+  }
+  100% {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 28px rgba(139, 92, 246, 0.25);
+  }
+}
 
 @keyframes pulse-dot {
   0%, 100% {

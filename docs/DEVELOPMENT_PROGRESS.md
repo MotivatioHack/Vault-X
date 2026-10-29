@@ -117,7 +117,18 @@ The following items were strictly excluded from Brick 1 and will be introduced i
 
 ---
 
-### 9. Exact Next Step
+### 9. UI Requirement Update: Login-Only Entry Screen
+- **Objective**: Swapped default landing screen to an exclusive, futuristic login portal at `/`.
+- **Removed**: Marketing headlines, pillar cards, foundation badges, backend status boxes, and Ping API buttons.
+- **Created**:
+  - `client/src/pages/LoginPage.jsx`: Dedicated login form with email validation, master password show/hide toggle, remember-me checkbox, submit loading state, and pending auth notice banner.
+  - `client/src/styles/login.css`: Cybersecurity glassmorphism card styling, responsive layouts, subtle animated glows, and reduced-motion accessibility support.
+- **Updated**:
+  - `client/src/App.jsx`: Configured default route `/` to render only `LoginPage`. All unmatched routes redirect to `/`.
+
+---
+
+### 10. Exact Next Step
 - **Brick 2: Database Connection & User Authentication Model**
   - Integrate MongoDB Atlas with Mongoose.
   - Implement User schema with cryptographic salt and password hash fields.

@@ -1,0 +1,370 @@
+/* Background Grid and Glows */
+.vault-layout {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.vault-glow-top {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.22) 0%, rgba(0, 242, 254, 0.12) 45%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vault-glow-bottom {
+  position: absolute;
+  bottom: -150px;
+  right: 10%;
+  width: 500px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(124, 58, 237, 0.08) 50%, transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Header & Navigation */
+.vault-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(12px);
+  background: rgba(7, 9, 14, 0.7);
+}
+
+.vault-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.vault-logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(124, 58, 237, 0.25));
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 16px var(--accent-cyan-glow);
+}
+
+.vault-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.vault-brand-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #ffffff 30%, var(--accent-cyan) 80%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vault-brand-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+/* Header System Status */
+.vault-header-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Main Content Area */
+.vault-main {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Hero Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid var(--border-violet);
+  margin-bottom: 1.75rem;
+}
+
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+.hero-badge-text {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Hero Title */
+.hero-heading {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  max-width: 800px;
+  margin-bottom: 1.25rem;
+}
+
+.hero-gradient-text {
+  background: linear-gradient(135deg, #ffffff 20%, var(--accent-cyan) 65%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 620px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+/* Core Foundation Grid Cards */
+.foundation-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.foundation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.foundation-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-glow);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--accent-violet);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Live Health Component */
+.health-box {
+  width: 100%;
+  background: rgba(13, 17, 27, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.health-status-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-indicator-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.status-indicator-light.connected {
+  background-color: var(--status-success);
+  box-shadow: 0 0 10px var(--status-success);
+}
+
+.status-indicator-light.connected::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--status-success);
+  animation: pulse-ring 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.status-indicator-light.connecting {
+  background-color: var(--status-warning);
+  box-shadow: 0 0 10px var(--status-warning);
+}
+
+.status-indicator-light.disconnected {
+  background-color: var(--status-error);
+  box-shadow: 0 0 10px var(--status-error);
+}
+
+.health-status-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.health-status-detail {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.health-badge-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.meta-pill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.refresh-button {
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  color: var(--accent-cyan);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
+
+.refresh-button:hover {
+  background: rgba(0, 242, 254, 0.2);
+  border-color: var(--accent-cyan);
+}
+
+/* Footer */
+.vault-footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid var(--border-subtle);
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-brick-badge {
+  font-family: var(--font-mono);
+  color: var(--accent-violet);
+  background: rgba(124, 58, 237, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .vault-header, .vault-footer {
+    padding: 1rem 1.25rem;
+  }
+  .health-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

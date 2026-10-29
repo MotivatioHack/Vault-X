@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function SignInForm() {
-  // Refinement 2: Email and password start strictly empty with zero prefilled credentials
+  const { login } = useAuth();
+
+  // Email and password start strictly empty with zero prefilled credentials
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -9,16 +13,11 @@ export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Refinement 3: Professional, concise pending notice visible on the page
-  const [statusNotice, setStatusNotice] = useState(
-    'Authentication service pending. Database credential verification will be enabled in a later development stage.'
-  );
-
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
 
@@ -48,16 +47,19 @@ export default function SignInForm() {
       return;
     }
 
-    // 4. Form Submission Loading State
+    // 4. Form Submission & Real Backend Login
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-      // Ensure the notice remains the professional pending wording
-      setStatusNotice(
-        'Authentication service pending. Database credential verification will be enabled in a later development stage.'
+    try {
+      await login(trimmedEmail, password, rememberMe);
+      // Successful authentication automatically triggers route redirect via AuthContext
+    } catch (err) {
+      setErrorMessage(
+        err.message || 'Authentication failed. Please verify your credentials or server connection.'
       );
-    }, 700);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -69,7 +71,7 @@ export default function SignInForm() {
         </p>
       </div>
 
-      {/* Dedicated Validation Error Area */}
+      {/* Dedicated Validation / Authentication Error Area */}
       {errorMessage && (
         <div className="form-alert alert-error" role="alert" aria-live="assertive">
           <svg className="alert-svg-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -78,18 +80,6 @@ export default function SignInForm() {
             <circle cx="12" cy="16" r="1" fill="#dc2626" />
           </svg>
           <span className="alert-message">{errorMessage}</span>
-        </div>
-      )}
-
-      {/* Refinement 3: Light Violet Information Panel for Pending Authentication */}
-      {statusNotice && (
-        <div className="form-alert alert-notice" role="status" aria-live="polite">
-          <svg className="alert-svg-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" stroke="#4f46e5" strokeWidth="2" />
-            <path d="M12 16V12" stroke="#4f46e5" strokeWidth="2" strokeLinecap="round" />
-            <circle cx="12" cy="8" r="1" fill="#4f46e5" />
-          </svg>
-          <span className="alert-message">{statusNotice}</span>
         </div>
       )}
 
@@ -192,6 +182,14 @@ export default function SignInForm() {
             <span>Sign In</span>
           )}
         </button>
+
+        {/* Link to Sign Up */}
+        <div className="auth-switch-row">
+          <span>Don't have a vault yet?</span>
+          <Link to="/signup" className="auth-switch-link">
+            Create Account
+          </Link>
+        </div>
       </form>
 
       {/* Descriptive Footer (Intended Design rather than unverified security claims) */}

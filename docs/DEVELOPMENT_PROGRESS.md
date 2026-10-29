@@ -177,8 +177,171 @@ The following items were strictly excluded from Brick 1 and will be introduced i
 
 ---
 
-### 12. Exact Next Step
-- **Brick 2: Database Connection & User Authentication Model**
-  - Integrate MongoDB Atlas with Mongoose.
-  - Implement User schema with cryptographic salt and password hash fields.
-  - Implement registration and authentication endpoints with JWT and bcrypt.
+## Milestone: Brick 2 — Real User Authentication & Database Integration
+
+### 1. Overview
+Brick 2 implements end-to-end user authentication for Vault-X. The Express backend integrates with MongoDB using Mongoose, hashes passwords using bcrypt, issues signed JSON Web Tokens (JWT) inside HttpOnly cookies, and protects session state. The React frontend is integrated with an `AuthContext`, a protected dashboard view (`/vault`), session persistence via `/api/auth/me`, and seamless sign-in and sign-out flows without altering the approved split-screen visual design.
+
+---
+
+### 2. Files Added & Modified
+
+#### Backend Added
+- `server/src/config/db.js`: Mongoose connection manager with duplicate-connection prevention and sanitized logging.
+- `server/src/models/user.model.js`: User model with unique normalized email index, hidden `passwordHash`, and safe JSON serialization.
+- `server/src/utils/token.js`: JWT signing, verification, and HttpOnly cookie management.
+- `server/src/middleware/auth.middleware.js`: Route authorization middleware verifying session cookies.
+- `server/src/middleware/rateLimiter.js`: Brute-force protection for sign-in attempts.
+- `server/src/controllers/auth.controller.js`: Business logic for register, login, logout, and me endpoints.
+- `server/src/routes/auth.routes.js`: Route definitions for authentication endpoints.
+
+#### Backend Modified
+- `server/.env.example`: Updated with `MONGODB_URI`, `JWT_SECRET`, and `JWT_EXPIRES_IN`.
+- `server/src/config/environment.js`: Loaded new configuration parameters.
+- `server/src/controllers/health.controller.js` & `server/src/services/health.service.js`: Added database connectivity status to `/api/health`.
+- `server/src/routes/index.js`: Mounted `/api/auth` router.
+- `server/src/app.js`: Added `cookie-parser`, 100kb payload limit, and database connection trigger on startup.
+
+#### Frontend Added
+- `client/src/context/AuthContext.jsx`: Central authentication provider managing user session, login, registration, and logout state.
+- `client/src/components/ProtectedRoute.jsx`: Client route guard redirecting unauthenticated users to `/`.
+- `client/src/components/SignUpForm.jsx`: Luxury right-panel user registration form with validation, password confirmation, policy hint, error states, and sign-in navigation.
+- `client/src/components/VaultIdentityVisual.jsx`: Distinct cinematic identity verification & vault unlock animation for the Sign In page (Stage A: Idle orbit rings, Stage B: Vertical scanning sweep, Stage C: Mechanism alignment & light trails, Stage D: Vault secured radiant shield, Stage E: Seamless looping).
+- `client/src/pages/SignUpPage.jsx`: Split-screen user registration page pairing the 55% cinematic encryption visualization (`VaultCinematicVisual.jsx`) with the luxury sign-up panel.
+- `client/src/pages/VaultDashboard.jsx`: Minimal authenticated placeholder view displaying user email, status, and logout button.
+- `client/src/styles/dashboard.css`: Styling for the authenticated dashboard view.
+- `docs/MONGODB_ATLAS_SETUP.md`: Comprehensive setup and security guide for MongoDB Atlas database configuration.
+
+#### Frontend Modified
+- `client/src/App.jsx`: Wrapped in `AuthProvider`, added `/signup`, `/register`, and `/vault` routes and public/protected redirects.
+- `client/src/pages/LoginPage.jsx`: Configured to exclusively display `VaultIdentityVisual.jsx` for identity verification and vault unlock.
+- `client/src/components/SignInForm.jsx`: Real backend login call with error handling, loading states, and navigation link to Sign Up (`/signup`).
+- `client/src/styles/split-login.css`: Added styles for the identity verification vault core, coordinate orbit rings, segmented geared rings, circuit reticles, mechanical iris aperture blades, luminous scanning beam, and telemetry capsule.
+
+---
+
+### 3. Dependencies Installed
+#### Server
+- `mongoose`: MongoDB object modeling and schema validation.
+- `bcryptjs`: Secure password hashing with salt work factor 12.
+- `jsonwebtoken`: Cryptographically signed session tokens.
+- `cookie-parser`: Express middleware for parsing HttpOnly cookies.
+- `express-rate-limit`: Brute force attack mitigation.
+
+---
+
+### 4. Environment Variables Required
+Configured in `server/.env`:
+- `PORT=5000`
+- `NODE_ENV=development`
+- `CLIENT_URL=http://localhost:5173`
+- `MONGODB_URI`: MongoDB connection string (local MongoDB server or MongoDB Atlas URI).
+- `JWT_SECRET`: High-entropy secret key for signing tokens.
+- `JWT_EXPIRES_IN`: Session token validity (default `7d`).
+
+---
+
+### 5. API Endpoints
+- `GET /api/health`: Server health check reporting `status: "operational"` and `database: "connected"`.
+- `POST /api/auth/register`: Creates a user with bcrypt-hashed password; rejects duplicates and invalid passwords.
+- `POST /api/auth/login`: Authenticates credentials with rate limiting and issues an HttpOnly cookie.
+- `POST /api/auth/logout`: Clears the session cookie.
+- `GET /api/auth/me`: Retrieves current authenticated user profile using cookie authorization.
+
+---
+
+### 6. Verification & Test Results
+Executed 28 automated integration checks across 11 test categories against live MongoDB Atlas:
+1. Health check returns 200 with `database: "connected"`.
+2. Registration input validation rejects missing email or password (400).
+3. Registration input validation rejects malformed email syntax (400).
+4. Registration input validation rejects short password under 8 characters (400).
+5. Registration creates user and returns 201 with sanitized user profile (no password or passwordHash).
+6. Direct database query verified stored password is an authentic `$2...` bcrypt hash string, never plaintext.
+7. Duplicate registration rejected with 409 Conflict (handles whitespace and case normalization).
+8. Login rejects incorrect password with 401 Unauthorized.
+9. Login rejects nonexistent email with 401 Unauthorized.
+10. Valid credentials return 200 OK and issue an HttpOnly `vault_token` cookie.
+11. Unauthenticated `GET /api/auth/me` returns 401 Unauthorized.
+12. Authenticated `GET /api/auth/me` returns user profile with active session and no passwordHash.
+13. `POST /api/auth/logout` clears the session cookie with immediate expiration.
+14. Subsequent `GET /api/auth/me` returns 401 Unauthorized.
+15. Temporary test account cleanly pruned from database following test suite execution.
+16. Frontend production build (`npm run build`) passed with zero errors or warnings.
+
+---
+
+### 7. Known Limitations
+- The authenticated view (`/vault`) is connected to the real backend and session management; client-side file encryption is scheduled for Brick 4.
+
+---
+
+## Milestone: Brick 3 — Authenticated Vault Dashboard & File Manager Foundation
+
+### 1. Overview
+Brick 3 establishes the primary authenticated workspace for Vault-X. Once signed in, users access the `/vault` dashboard featuring a cyber luxury dark UI, sidebar navigation with an encrypted storage quota meter, live telemetry summary cards, file search/filter/sort toolbar, responsive file presentation (table and card views), an elegant zero-files empty state, an upload modal with drag-and-drop validation, and a safe deletion confirmation interface.
+
+---
+
+### 2. Files Added & Modified
+
+#### Frontend Added
+- `client/src/components/dashboard/DashboardSidebar.jsx`: Sidebar navigation with brand logo, "+ Upload File" primary action, explorer links (All Files, Recent, Security, Trash), 5 GB storage quota meter, and user profile capsule.
+- `client/src/components/dashboard/DashboardHeader.jsx`: Sticky dashboard header with real-time filename search, active security status pill, user avatar, and accessible account dropdown menu with logout action.
+- `client/src/components/dashboard/SummaryCards.jsx`: 4 telemetry summary cards displaying real file counts, storage allocation, zero-knowledge architecture status, and active session verification.
+- `client/src/components/dashboard/FilesToolbar.jsx`: File exploration toolbar with item count badge, category filters (All, Documents, Images, Archives, Media), sort select (Name, Date, Size), search query reset, and list/grid view toggle.
+- `client/src/components/dashboard/FilesList.jsx`: Renders file list/table or card/grid views, an empty search query state, and an empty vault illustration when zero files exist.
+- `client/src/components/dashboard/UploadModal.jsx`: Drag-and-drop upload modal with file size validation (max 50 MB), file detail preview, and an architectural milestone notice explaining that plaintext file transmission is held pending the client-side encryption engine.
+- `client/src/components/dashboard/DeleteConfirmModal.jsx`: Accessible confirmation modal identifying the targeted file before deletion with permanent deletion warnings.
+
+#### Frontend Modified
+- `client/src/pages/VaultDashboard.jsx`: Rewritten to orchestrate the complete dashboard layout, manage search/filter/sort states, fetch authentic file inventory from `/api/files`, and handle modals.
+- `client/src/styles/dashboard.css`: Complete styling for the cyber luxury dashboard, sidebar, header, summary cards, empty states, file tables, grid cards, modals, and responsive breakpoints.
+
+#### Backend Added
+- `server/src/routes/file.routes.js`: Protected file inventory endpoint (`GET /api/files`) requiring cookie authorization and returning authentic account file metadata and quota.
+
+#### Backend Modified
+- `server/src/routes/index.js`: Mounted `/api/files` router.
+
+---
+
+### 3. Strict Scope Boundaries Maintained (Brick 3)
+In strict accordance with the project guidelines, the following items were deferred to subsequent bricks:
+- GridFS binary file storage in MongoDB.
+- Actual plaintext file transmission to backend.
+- Client-side Web Crypto AES-256-GCM encryption/decryption engine.
+- Argon2id / PBKDF2 master key derivation.
+- Key persistence and crypto worker threads.
+- Public file sharing.
+
+---
+
+### 4. Verification & Test Results
+Executed 25 automated integration checks across 8 test suites:
+1. Health endpoint returns 200 OK with `database: "connected"`.
+2. Unauthenticated `GET /api/auth/me` rejected with 401 Unauthorized.
+3. Unauthenticated `GET /api/files` rejected with 401 Unauthorized.
+4. User registration and login succeed with 200/201 and issue an HttpOnly `vault_token` cookie.
+5. Authenticated `GET /api/auth/me` returns verified user profile with exact email.
+6. Authenticated `GET /api/files` returns genuine inventory (`count: 0`, empty array, 0 B used, 5 GB quota).
+7. Session persistence verified across multiple requests.
+8. `POST /api/auth/logout` clears session cookie and immediately revokes access.
+9. Subsequent requests without cookie are rejected with 401 Unauthorized.
+10. All frontend routes (`/`, `/signup`, `/vault`) serve HTTP 200 OK.
+11. Temporary test accounts safely pruned from MongoDB Atlas.
+12. Frontend production build (`npm run build`) passed cleanly in 2.24s with 49 modules transformed and 0 errors.
+
+---
+
+### 5. Known Limitations
+- File upload is in staged/foundation mode with validation and preview; binary transmission is deferred until the client encryption pipeline is built in Brick 4 to avoid sending plaintext to the server.
+
+---
+
+### 6. Exact Next Step
+- **Brick 4: Client-Side Cryptographic Key Derivation & AES-256-GCM Encryption Engine**
+  - Web Crypto API Argon2id/PBKDF2 key derivation from master password.
+  - In-memory chunked AES-256-GCM file encryption and decryption worker.
+  - Cryptographic checksum verification and encrypted blob streaming.
+

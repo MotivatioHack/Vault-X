@@ -8,6 +8,7 @@ export const checkHealth = (req, res, next) => {
       success: true,
       message: 'Vault-X API is operational',
       environment: healthData.environment,
+      database: healthData.database,
       timestamp: healthData.timestamp,
     });
   } catch (error) {
